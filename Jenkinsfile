@@ -50,6 +50,8 @@ pipeline {
                           -p ${HOST_PORT}:${APP_PORT} \
                           --name ${IMAGE_NAME} \
                           -e APP_MESSAGE='Deployment via Jenkins Build #${env.BUILD_ID}' \
+                          -e BUILD_ID=${env.BUILD_ID} \
+                          --restart always \
                           ${IMAGE_NAME}:${tag}
                     """
                     echo "Application deployed successfully. Access via http://[Public IP]:80"

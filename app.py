@@ -8,6 +8,8 @@ MESSAGE = os.environ.get('APP_MESSAGE', 'Hello from Jenkins CI/CD Pipeline!')
 @app.route('/')
 def hello():
     # render_template을 사용하여 templates/index.html 파일을 반환
+    # os.environ.get('BUILD_ID')로 컨테이너 환경 변수를 읽어옵니다.
+    build_id = os.environ.get('BUILD_ID', 'N/A')
     # Flask Template Engine (Jinja2)를 통해 변수(message)를 전달
     build_message = f"Deployment via Jenkins Build #{os.environ.get('BUILD_ID', 'N/A')} | Version: 1.0"
     return render_template('index.html', message=build_message)
