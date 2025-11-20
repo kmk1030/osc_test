@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template # render_template 모듈 추가
 import os
 
 app = Flask(__name__)
@@ -7,7 +7,10 @@ MESSAGE = os.environ.get('APP_MESSAGE', 'Hello from Jenkins CI/CD Pipeline!')
 
 @app.route('/')
 def hello():
-    return f"<h1>{MESSAGE}</h1><h2>Version: 1.0</h2>"
+    # render_template을 사용하여 templates/index.html 파일을 반환
+    # Flask Template Engine (Jinja2)를 통해 변수(message)를 전달
+    build_message = f"Deployment via Jenkins Build #{os.environ.get('BUILD_ID', 'N/A')} | Version: 1.0"
+    return render_template('index.html', message=build_message)
 
 if __name__ == '__main__':
     # Docker 내부에서 접근 가능한 호스트와 포트 설정

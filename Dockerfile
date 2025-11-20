@@ -12,6 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 애플리케이션 파일 복사
 COPY app.py .
 
+COPY templates /app/templates
+
 # 앱이 사용할 포트 명시 (Jenkinsfile에서 이 포트를 외부로 노출할 것입니다.)
 EXPOSE 8000
 
